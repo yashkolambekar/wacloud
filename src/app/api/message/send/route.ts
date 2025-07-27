@@ -10,7 +10,8 @@ const GET = async (req: NextRequest) => {
 
   await wa.sendMessage({
     to: "919324612161",
-    message: "Hello from WaCloud!",
+    message: "Have you checked this primeagn video? https://www.youtube.com/watch?v=RlTVMi4JzZA",
+    enableLinkPreview: false,
   });
 
   return NextResponse.json(

@@ -1,5 +1,6 @@
 import sendMessage from "./resources/message/sendMessage";
 import sendImage from "./resources/message/sendImage";
+import sendCTA from "./resources/message/sendCTA";
 
 interface IClient {
   BASE_URL: string;
@@ -30,7 +31,15 @@ class Client implements IClient {
     this.businessAccountId = businessAccountId;
   }
 
-  sendMessage = async ({ to, message }: { to: string; message: string }) => {
+  sendMessage = async ({
+    to,
+    message,
+    enableLinkPreview,
+  }: {
+    to: string;
+    message: string;
+    enableLinkPreview?: boolean;
+  }) => {
     return sendMessage(
       {
         phoneId: this.phoneId,
@@ -39,13 +48,21 @@ class Client implements IClient {
       },
       {
         to,
-        message
+        message,
+        enableLinkPreview,
       }
     );
   };
 
-
-  sendImage = async ({ to, imageLink, caption }: { to: string; imageLink: string; caption?: string }) => {
+  sendImage = async ({
+    to,
+    imageLink,
+    caption,
+  }: {
+    to: string;
+    imageLink: string;
+    caption?: string;
+  }) => {
     return sendImage(
       {
         phoneId: this.phoneId,
@@ -55,12 +72,36 @@ class Client implements IClient {
       {
         to,
         imageLink,
-        caption
+        caption,
       }
-    )
-  }
+    );
+  };
 
+  sendCTA = async ({
+    to,
+    ctaUrl,
+    ctaText,
+    message,
+  }: {
+    to: string;
+    ctaUrl: string;
+    ctaText: string;
+    message: string;
+  }) => {
+    return sendCTA(
+      {
+        phoneId: this.phoneId,
+        token: this.token,
+        baseRequestUrl: this.baseRequestUrl,
+      },
+      {
+        to,
+        ctaUrl,
+        ctaText,
+        message,
+      }
+    );
+  };
 }
-
 
 export default Client;

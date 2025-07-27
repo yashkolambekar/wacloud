@@ -1,34 +1,43 @@
 import axios from "axios";
 
-const sendMessage = async (
+const sendCTA = async (
   ctx: { phoneId: string; token: string; baseRequestUrl: string },
-  data: {
-    to: string;
-    message: string;
-    enableLinkPreview?: boolean;
-  }
+  data: { to: string; ctaUrl: string; ctaText: string; message: string; footer?: string }
 ) => {
   if (
     !ctx.phoneId ||
     !ctx.token ||
     !ctx.baseRequestUrl ||
     !data.to ||
+    !data.ctaUrl ||
+    !data.ctaText ||
     !data.message
   ) {
     throw new Error("Missing required parameters");
-  }
-
-  if (data.enableLinkPreview === undefined) {
-    data.enableLinkPreview = false;
   }
 
   const response = await axios.post(
     `${ctx.baseRequestUrl}/${ctx.phoneId}/messages`,
     {
       messaging_product: "whatsapp",
-      type: "text",
+      type: "interactive",
       to: data.to,
-      text: { body: data.message, preview_url: data.enableLinkPreview },
+      interactive: {
+        type: "cta_url",
+        body: {
+          text: data.message,
+        },
+        action: {
+          name: "cta_url",
+          parameters: {
+            display_text: data.ctaText,
+            url: data.ctaUrl,
+          },
+        },
+        footer: {
+            text: data.footer,
+        }
+      },
     },
     {
       headers: {
@@ -47,4 +56,4 @@ const sendMessage = async (
   return true;
 };
 
-export default sendMessage;
+export default sendCTA;

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Client from "../../../../../package/src/index";
+import Client from "../../../../../package/src";
 
 const GET = async (req: NextRequest) => {
   const phoneId = process.env.WHATSAPP_PHONE_ID || "";
@@ -8,16 +8,17 @@ const GET = async (req: NextRequest) => {
 
   const wa = new Client(phoneId, token, businessAccountId);
 
-  await wa.sendImage({
+  await wa.sendCTA({
     to: "919324612161",
-    imageLink: "https://res.cloudinary.com/dpaigt2bx/image/upload/v1745254113/mka.jpg",
-    caption: "BookMyPuja Logo"
+    ctaUrl: "https://www.example.com",
+    ctaText: "Click Here",
+    message: `This is a call to action message\nClick the button below to proceed.`,
   });
 
   return NextResponse.json(
     {
       status: "success",
-      message: "Message sent successfully",
+      message: "CTA message sent successfully",
     },
     {
       status: 200,

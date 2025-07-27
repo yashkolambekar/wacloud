@@ -1,0 +1,30 @@
+{
+  "name": "wacloud",
+  "description": "",
+  "version": "0.0.2",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "homepage": "",
+  "repository": {
+    "url": ""
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "whatsapp",
+    "whatsapp api",
+    "whatsapp cloud api",
+    "whatsapp business api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "axios": "^1.11.0"
+  }
+}

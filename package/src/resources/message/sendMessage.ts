@@ -2,8 +2,10 @@ import axios from "axios";
 
 const sendMessage = async (
   ctx: { phoneId: string; token: string; baseRequestUrl: string },
-  to: string,
-  message: string
+  data: {
+    to: string;
+    message: string;
+  }
 ) => {
   if (!ctx.phoneId || !ctx.token || !ctx.baseRequestUrl) {
     throw new Error("Missing required parameters");
@@ -13,8 +15,8 @@ const sendMessage = async (
     `${ctx.baseRequestUrl}/${ctx.phoneId}/messages`,
     {
       messaging_product: "whatsapp",
-      to: to,
-      text: { body: message },
+      to: data.to,
+      text: { body: data.message },
     },
     {
       headers: {

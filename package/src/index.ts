@@ -29,18 +29,20 @@ class Client implements IClient {
     this.businessAccountId = businessAccountId;
   }
 
-  sendMessage = async (to: string, message: string) => {
+  sendMessage = async ({ to, message }: { to: string; message: string }) => {
     return sendMessage(
       {
         phoneId: this.phoneId,
         token: this.token,
         baseRequestUrl: this.baseRequestUrl,
       },
-      to,
-      message
+      {
+        to,
+        message
+      }
     );
   };
-  
+
 }
 
 

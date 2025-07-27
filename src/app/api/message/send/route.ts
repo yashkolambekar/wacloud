@@ -8,7 +8,10 @@ const GET = async (req: NextRequest) => {
 
   const wa = new Client(phoneId, token, businessAccountId);
 
-  await wa.sendMessage("919324612161", "Hello from WaCloud!");
+  await wa.sendMessage({
+    to: "919324612161",
+    message: "Hello from WaCloud!",
+  });
 
   return NextResponse.json(
     {

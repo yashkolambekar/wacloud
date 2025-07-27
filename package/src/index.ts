@@ -1,4 +1,5 @@
 import sendMessage from "./resources/message/sendMessage";
+import sendImage from "./resources/message/sendImage";
 
 interface IClient {
   BASE_URL: string;
@@ -42,6 +43,22 @@ class Client implements IClient {
       }
     );
   };
+
+
+  sendImage = async ({ to, imageLink, caption }: { to: string; imageLink: string; caption?: string }) => {
+    return sendImage(
+      {
+        phoneId: this.phoneId,
+        token: this.token,
+        baseRequestUrl: this.baseRequestUrl,
+      },
+      {
+        to,
+        imageLink,
+        caption
+      }
+    )
+  }
 
 }
 

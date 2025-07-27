@@ -7,7 +7,8 @@ const sendMessage = async (
     message: string;
   }
 ) => {
-  if (!ctx.phoneId || !ctx.token || !ctx.baseRequestUrl) {
+
+  if (!ctx.phoneId || !ctx.token || !ctx.baseRequestUrl || !data.to || !data.message) {
     throw new Error("Missing required parameters");
   }
 
@@ -15,6 +16,7 @@ const sendMessage = async (
     `${ctx.baseRequestUrl}/${ctx.phoneId}/messages`,
     {
       messaging_product: "whatsapp",
+      type: "text",
       to: data.to,
       text: { body: data.message },
     },

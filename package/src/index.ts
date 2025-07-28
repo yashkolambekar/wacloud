@@ -1,6 +1,7 @@
 import sendMessage from "./resources/message/sendMessage";
 import sendImage from "./resources/message/sendImage";
 import sendCTA from "./resources/message/sendCTA";
+import Headers, { IHeader } from "./utils/template/headers,";
 
 interface IClient {
   BASE_URL: string;
@@ -82,11 +83,15 @@ class Client implements IClient {
     ctaUrl,
     ctaText,
     message,
+    header,
+    footer,
   }: {
     to: string;
     ctaUrl: string;
     ctaText: string;
     message: string;
+    header?: IHeader;
+    footer?: string;
   }) => {
     return sendCTA(
       {
@@ -99,9 +104,12 @@ class Client implements IClient {
         ctaUrl,
         ctaText,
         message,
+        header,
+        footer,
       }
     );
   };
 }
 
+export { Headers };
 export default Client;

@@ -1,8 +1,9 @@
 import axios from "axios";
+import { IHeader } from "../../utils/template/headers,";
 
 const sendCTA = async (
   ctx: { phoneId: string; token: string; baseRequestUrl: string },
-  data: { to: string; ctaUrl: string; ctaText: string; message: string; footer?: string }
+  data: { to: string; ctaUrl: string; ctaText: string; message: string; footer?: string, header?: IHeader }
 ) => {
   if (
     !ctx.phoneId ||
@@ -27,6 +28,7 @@ const sendCTA = async (
         body: {
           text: data.message,
         },
+        header: data.header,
         action: {
           name: "cta_url",
           parameters: {

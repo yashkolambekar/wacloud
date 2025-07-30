@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Client, { Headers } from "../../../../../package/src";
+import Client, { Headers, Language, Parameters } from "../../../../../package/src";
 
 const GET = async () => {
   const phoneId = process.env.WHATSAPP_PHONE_ID || "";
@@ -8,13 +8,16 @@ const GET = async () => {
 
   const wa = new Client(phoneId, token, businessAccountId);
 
-  await wa.sendCTA({
+  await wa.sendTemplate({
     to: "919324612161",
-    ctaUrl: "https://www.example.com",
-    ctaText: "Click Here",
-    message: `This is a call to action message\nClick the button below to proceed.`,
-    header: Headers.document("https://customerinvoicebucketmumbai.s3.ap-south-1.amazonaws.com/invoices/mka-meenkulathi/production/4d9d8c79-01ea-4464-b09c-95a7c8c766fc.pdf")
-    // footer: "Sent with Wacloud",    
+    language: Language.English,
+    name: "testing_template",
+    header: Headers.image("https://res.cloudinary.com/dpaigt2bx/image/upload/v1745254113/mka.jpg"),
+    // header: Headers.text("This is a header text"),
+    data: [
+        Parameters.named("customer_name", "John Doe"),
+        Parameters.named("officer_name", "Jane Smith"),
+    ]
   });
 
   return NextResponse.json(

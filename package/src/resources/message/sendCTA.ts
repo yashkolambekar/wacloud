@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IHeader } from "../../utils/template/headers,";
+import { IHeader } from "../../utils/template/headers";
 
 const sendCTA = async (
   ctx: { phoneId: string; token: string; baseRequestUrl: string },

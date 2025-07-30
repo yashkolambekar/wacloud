@@ -1,7 +1,10 @@
 import sendMessage from "./resources/message/sendMessage";
 import sendImage from "./resources/message/sendImage";
 import sendCTA from "./resources/message/sendCTA";
-import Headers, { IHeader } from "./utils/template/headers,";
+import sendTemplate from "./resources/template/sendTemplate";
+import Headers, { IHeader } from "./utils/template/headers";
+import { Language, LanguageCode } from "./utils/template/languages";
+import Parameters from "./utils/template/parameters";
 
 interface IClient {
   BASE_URL: string;
@@ -109,7 +112,37 @@ class Client implements IClient {
       }
     );
   };
+
+  sendTemplate = async ({
+    to,
+    name,
+    language,
+    header,
+    data,
+  }: {
+        to: string;
+    name: string;
+    language: LanguageCode;
+    header: IHeader;
+    data: { [key: string]: string }[];
+  }) => {
+    return sendTemplate(
+      {
+        phoneId: this.phoneId,
+        token: this.token,
+        baseRequestUrl: this.baseRequestUrl,
+      },
+      {
+        to,
+        name,
+        language,
+        header,
+        parameters: data,
+      }
+    );
+  };
+
 }
 
-export { Headers };
+export { Headers, Language, Parameters};
 export default Client;

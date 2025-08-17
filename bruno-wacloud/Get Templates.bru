@@ -1,0 +1,19 @@
+meta {
+  name: Get Templates
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://graph.facebook.com/v17.0/{{WABA_ACCOUNT_ID}}/message_templates
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: EAAeQTyZAfHh8BOx69XC4dwJn61jRexb5NLJpled4wFKZCZC2XIoD73yFGLXfq3KxbHny1olI8USQRwyZAcEXxXjZCZBnrza8oEb6kNEyZBjPUYMkKH9wZB2eCV5TZBxnM16LVf1xf8kh84ZCRUD0hlMQPfaO9F7E7vzKLp4ffdyHDqD4qnzNNX1KgU966ZAxoJhewkg3QZDZD
+}
+
+settings {
+  encodeUrl: true
+}

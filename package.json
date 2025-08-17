@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "setup": "[ -f .env ] || cp .env.example .env && npm i && cd package && npm i",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

@@ -1,0 +1,23 @@
+meta {
+  name: INVOKE INVOICE
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/api/invoke-invoice
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "bookingId": "2bfc8e4b-8094-487a-bd95-12f52ee10a00",
+    "source": "n8n",
+    "forceRetry": true
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -13,14 +13,6 @@ const sendTemplate = async (
     parameters: { [key: string]: string }[];
   }
 ) => {
-  // let finalParameteres: { [key: string]: any }[] = [];
-
-
-  // for (const param of data.parameters) {
-  //   finalParameteres.push(param);
-  // }
-
-  // console.log("Final Parameters:", finalParameteres);
 
   const response = await axios.post(
     `${ctx.baseRequestUrl}/${ctx.phoneId}/messages`,

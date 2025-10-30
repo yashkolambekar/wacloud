@@ -5,6 +5,7 @@ import sendTemplate from "./resources/template/sendTemplate";
 import Headers, { IHeader } from "./utils/template/headers";
 import { Language, LanguageCode } from "./utils/template/languages";
 import Parameters from "./utils/template/parameters";
+import sendAudio from "./resources/message/sendAudio";
 
 interface IClient {
   BASE_URL: string;
@@ -23,7 +24,7 @@ class Client implements IClient {
   token: string;
   businessAccountId: string;
 
-  constructor(phoneId: string, token: string, businessAccountId: string) {
+  constructor({phoneId, token, businessAccountId} :{phoneId: string, token: string, businessAccountId: string}) {
     if (!phoneId || !token || !businessAccountId) {
       throw new Error(
         "phoneId, token, and businessAccountId are required parameters."
@@ -80,6 +81,28 @@ class Client implements IClient {
       }
     );
   };
+
+
+  sendAudio = async ({
+    to,
+    audioLink,
+  } : {
+    to: string;
+    audioLink: string;
+  }) => {
+    return sendAudio(
+      {
+        phoneId: this.phoneId,
+        token: this.token,
+        baseRequestUrl: this.baseRequestUrl,
+      },
+      {
+        to,
+        audioLink,
+      }
+    );
+  }
+
 
   sendCTA = async ({
     to,

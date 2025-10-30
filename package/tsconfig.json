@@ -6,7 +6,7 @@
         "strictNullChecks": true,
         "target": "ES2022",
         "moduleResolution": "bundler",
-        "module": "CommonJS",
+        "module": "esnext",
         "declaration": true,
         "isolatedModules": true,
         "noEmit": true,

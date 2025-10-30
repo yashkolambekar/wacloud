@@ -6,7 +6,11 @@ const GET = async () => {
   const token = process.env.WHATSAPP_TOKEN || "";
   const businessAccountId = process.env.BUSINESS_ACCOUNT_ID || "";
 
-  const wa = new Client(phoneId, token, businessAccountId);
+  const wa = new Client({
+    businessAccountId: businessAccountId,
+    phoneId: phoneId,
+    token: token,
+  });
 
   await wa.sendCTA({
     to: "919324612161",

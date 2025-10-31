@@ -20,5 +20,73 @@ export async function generateTemplates(token: string, wabaId: string, version: 
 
   const templates = response.data.data;
 
-  await fs.writeFile(path.resolve("wacloud-files-templates.ts"), `const wacloudTemplates = ${JSON.stringify(templates)}\n \n export {wacloudTemplates}`);
+  let code = `
+interface Button {
+  type: string;
+  text: string;
+  url?: string;
+  example?: string[];
+  flow_id?: number;
+  flow_action?: string;
+  navigate_screen? : string;
+}
+
+interface HeaderComponent {
+  type: "HEADER";
+  format: "IMAGE" | "TEXT";
+  text?: string;
+  example?: {
+    header_handle?: string[];
+  };
+}
+
+interface BodyComponent {
+  type: "BODY";
+  text: string;
+  example?: {
+    body_text_named_params?: { param_name: string, example: string }[];
+    body_text?: string[][];
+  };
+  add_security_recommendation?: boolean;
+}
+
+interface ButtonsComponent {
+  type: "BUTTONS";
+  buttons: Button[];
+}
+
+interface FooterComponent {
+  type: "FOOTER";
+  text: string;
+  code_expiration_minutes?: number;
+}
+
+type Component =
+  | HeaderComponent
+  | BodyComponent
+  | ButtonsComponent
+  | FooterComponent;
+
+interface Template {
+  name: string;
+  parameter_format: "POSITIONAL" | "NAMED";
+  components: Component[];
+  language: string;
+  status: "APPROVED" | "REJECTED" | "PENDING" | string;
+  category: "UTILITY" | "MARKETING" | "AUTHENTICATION";
+  id: string;
+  previous_category?: string;
+  correct_category?: string;
+  sub_category?: string;
+  message_send_ttl_seconds?: number;
+}
+  
+
+`;
+
+
+code += `const wacloudTemplates : Template[] = ${JSON.stringify(templates)}\n \n export {wacloudTemplates}`;
+
+
+  await fs.writeFile(path.resolve("wacloud-files-templates.ts"), code);
 }

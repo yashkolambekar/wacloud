@@ -1,13 +1,16 @@
 {
   "name": "wacloud",
   "description": "",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "homepage": "",
   "repository": {
     "url": ""
+  },
+  "bin": {
+    "whatsapp-templates": "./dist/cli.ts"
   },
   "scripts": {
     "build": "tsup"
@@ -25,6 +28,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "axios": "^1.11.0"
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.3"
   }
 }

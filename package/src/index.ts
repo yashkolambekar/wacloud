@@ -6,6 +6,7 @@ import Headers, { IHeader } from "./utils/template/headers";
 import { Language, LanguageCode } from "./utils/template/languages";
 import Parameters from "./utils/template/parameters";
 import sendAudio from "./resources/message/sendAudio";
+import { generateTemplates } from "./template-gen";
 
 interface IClient {
   BASE_URL: string;
@@ -164,6 +165,10 @@ class Client implements IClient {
       }
     );
   };
+
+  geTemplates = async() => {
+    return generateTemplates(this.token, this.businessAccountId, this.API_VERSION);
+  }
 
 }
 

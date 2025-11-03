@@ -9,11 +9,10 @@ const sendTemplate = async (
     to: string;
     name: string;
     language: LanguageCode;
-    header: IHeader;
+    header?: IHeader;
     parameters: { [key: string]: string }[];
   }
 ) => {
-
   const response = await axios.post(
     `${ctx.baseRequestUrl}/${ctx.phoneId}/messages`,
     {
@@ -26,15 +25,19 @@ const sendTemplate = async (
           code: data.language,
         },
         components: [
-          {
-            type: "header",
-            parameters: [data.header]
-          },
+          ...(data.header
+            ? [
+                {
+                  type: "header",
+                  parameters: [data.header],
+                },
+              ]
+            : []),
           {
             type: "body",
             parameters: data.parameters,
-          }
-        ]
+          },
+        ],
       },
     },
     {

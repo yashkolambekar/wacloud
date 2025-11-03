@@ -147,7 +147,7 @@ class Client implements IClient {
         to: string;
     name: string;
     language: LanguageCode;
-    header: IHeader;
+    header?: IHeader;
     data: { [key: string]: string }[];
   }) => {
     return sendTemplate(
